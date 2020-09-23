@@ -1,0 +1,10 @@
+.nav_bar {
+    padding: 100px ;
+    margin-top: 50px;
+}
+.btn {
+    
+    padding: 10px 40px;
+    border: 2px solid #03e9f4;
+    background: #03e9f4;
+}
