@@ -4,9 +4,10 @@ import { LOGIN_SUCCESS } from "./constant";
 const initialState = {
     userData : {} ,
     error : '',
+    authError : '',
     isAuthenticated : '',
     token : '' ,
-    teachers : []
+    teachers : [],
 }
 
 export const AuthLogin = (state = initialState , action={}) => {
@@ -23,7 +24,7 @@ export const AuthLogin = (state = initialState , action={}) => {
 
             return {
               ...state,
-              error: action.payload,
+              authError: action.payload,
               isAuthenticated : false
             };
             case 'GET_TEACHERS' : 
@@ -36,6 +37,14 @@ export const AuthLogin = (state = initialState , action={}) => {
             return {
               ...state , error : action.payload
             }
+            case 'LOGOUT_USER_SUCCESS' :
+              return {
+                ...state,
+                userData: {},
+                token: "",
+                isAuthenticated: false,
+                teachers : []
+              };
         default:
             return state;
     }

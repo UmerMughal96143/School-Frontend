@@ -6,14 +6,16 @@ import './table.scss';
 
 
 export const AdminPage = () => {
-    const token = useSelector((state) => state.AuthLogin.token);
-    const teachers = useSelector((state) => state.AuthLogin.teachers); 
-    
+    // const token = useSelector((state) => state.AuthLogin.token);
+    const teachers = useSelector((state) => state.AuthLogin.teachers);   
 
     const dispatch = useDispatch();
-    console.log(teachers);
+    const token = localStorage.getItem("token");
+
+   
 
     useEffect(() => {
+      
         dispatch(getTeachers(token))
     } , [])
 

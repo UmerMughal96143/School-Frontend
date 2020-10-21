@@ -1,0 +1,8 @@
+.search-box{
+    padding: 15px;
+    margin-bottom: 50px;
+    transition: transform 1s ease-in;
+}
+.search-box:hover{
+    transform: scale(1.01);
+}

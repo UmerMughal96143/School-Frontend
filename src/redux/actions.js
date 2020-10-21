@@ -5,17 +5,23 @@ import axios from 'axios';
 
 
 export const  postLogin  =  (userData) => dispatch =>  {
-    
+    console.log(userData)
 
       axios
         .post("http://localhost:3002/user/admin/signin", {...userData})
-        .then(response => dispatch ({
+        .then(response =>{
+          const {token} = response.data;
+          localStorage.setItem('token' , token)
+
+         dispatch ({
           type : LOGIN_SUCCESS ,
           payload : response.data
 
-        })).catch(err => dispatch({
+        })
+        
+      }).catch(err => dispatch({
             type : 'ERROR' ,
-            payload : err
+            payload : err.response.data
         }))
 
 }
@@ -47,6 +53,7 @@ export const getTeachers = (token) => (dispatch) => {
 
 export const signUpTeacher = (teacherData , token) => (dispatch) => {
  console.log(teacherData , token)
+ 
   axios
     .post("http://localhost:3002/user/admin/add-teacher", { ...teacherData } ,{
       headers :{
@@ -62,7 +69,15 @@ export const signUpTeacher = (teacherData , token) => (dispatch) => {
     .catch((err) =>
       dispatch({
         type: "ERROR",
-        payload: err,
+        payload: err.response
       })
     );
 };
+
+export const LogoutUser = (data) => dispatch => {
+
+  dispatch({
+    type : 'LOGOUT_USER_SUCCESS',
+    payload : data
+  })
+}

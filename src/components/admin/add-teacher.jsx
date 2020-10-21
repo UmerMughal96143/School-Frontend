@@ -12,14 +12,13 @@ export const AddTeacher = () => {
 
   const dispatch = useDispatch();
 
-  const token = useSelector((state) => state.AuthLogin.token);
   const teacherData = {
     name : newName ,
     email : newEmail ,
     password : newPassword ,
     grade : Number(newGrade)
   }
-
+  const token = localStorage.getItem('token')
 
   const onSubmitChange = (e) => {
     e.preventDefault();

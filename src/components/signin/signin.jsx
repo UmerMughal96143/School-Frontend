@@ -5,19 +5,18 @@ import { postLogin } from "../../redux/actions";
 import {useSelector ,   useDispatch} from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-
-    const Signin = () => {
+    const Signin = ({tokenFunc}) => {
    const [newEmail, setEmail] = useState("");
    const [newPassword, setPassword] = useState({});
 
    const { name, role, email } = useSelector(
      (state) => state.AuthLogin.userData
    );
-   const token = useSelector((state) => state.token);
-  
-
-   console.log(name , email , role , token)
+    const token = localStorage.getItem('token')
+    tokenFunc(token)
    const dispatch = useDispatch();
+   const {err} = useSelector((state) => state.AuthLogin.authError)
+    console.log(err)
   
    const userData = {
      email :newEmail,
@@ -32,12 +31,24 @@ import { Redirect } from 'react-router-dom';
       setPassword('');
    };
 
-  
-   
+   const Validation = () => {
+     if(role === 'admin'){
+       return <Redirect to='/admin-menu' />
+     }
+     else if (role === 'teacher') {
+      return <Redirect to="/teacher-menu"/>;
+     }else if(role === 'student') {
+       return <Redirect to='/student-menu' />
+     }
+     else {
+        return <Redirect to='/signin' />
+     }
+   }
    
    return (
      <div className="login-box">
        <h2>Login</h2>
+       <p className={`${err ? 'error' : 'null'}`}>{err} </p>
        <form>
          <div className="user-box">
            <input
@@ -66,11 +77,7 @@ import { Redirect } from 'react-router-dom';
              type="submit"
              value="Sign in"
            />
-           {role === "admin" ? (
-             <Redirect to="/admin-menu" />
-           ) : (
-             <Redirect to="/signin" />
-           )}
+           {Validation()}
          </div>
        </form>
      </div>

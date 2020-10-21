@@ -1,20 +1,24 @@
 const intitalState = {
     isAuthenticated : '',
     errors : '',
-    student : {}
+    assignment : []
 }
 
 
-export const  StudentLogin =(state = intitalState , action = {}) => {
+export const  StudentLogin =(state = intitalState , action ={}) => {
 
     switch(action.type) {
         case 'SIGNUP_STD' : 
         return {
             ...state , isAuthenticated : true
         }
-        case 'SIGNIN_STD' : 
+        case 'UPLOAD_ASSIGNMENT' : 
         return {
-            ...state , student : action.payload
+            ...state 
+        }
+        case 'GET_ASSIGNMENT' : 
+        return {
+            ...state, assignment : action.payload.assignments
         }
         case 'ERROR' : 
         return {

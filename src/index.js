@@ -10,10 +10,11 @@ import { AuthLogin } from './redux/reducers';
 import {createLogger} from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import {StudentLogin} from './redux/student-reducer';
+import {Assignments} from './redux/teacher-reducer';
 
 
 const logger = createLogger();
-const rootReducer = combineReducers({AuthLogin ,StudentLogin})
+const rootReducer = combineReducers({AuthLogin ,StudentLogin , Assignments})
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 
